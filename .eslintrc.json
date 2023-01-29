@@ -1,3 +1,64 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "airbnb", "plugin:prettier/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "max-len":["error", 140],        //140 caracteres por linea
+    "indent":"off",
+    "linebreak-style":"off",
+    "quotes":[2, "single", { "avoidEscape": true }],
+    "react/require-default-props": "off",
+    "comma-dangle":"off",
+    "no-useless-catch":"off",
+    "semi": [ "error", "always"],
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "import/order": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "String": true,
+          "Boolean": true,
+          "Number": true,
+          "Symbol": true,
+          "{}": false,
+          "Object": true,
+          "object": true,
+          "Function": false
+        },
+        "extendDefaults": true
+      }
+    ],
+    "react/no-unescaped-entities": 0,
+    "no-explicit-any": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [1, {"extensions": [".tsx", ".jsx"]}],
+    "implicit-arrow-linebreak":"off",
+    "no-shadow":"off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "object-curly-newline":"off",
+    "max-classes-per-file": ["error", 4],
+    "default-case":"off",
+    "no-nested-ternary":"off",
+    "react/jsx-no-useless-fragment":"off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true }],
+    "no-restricted-globals": "off"
+  }
 }
