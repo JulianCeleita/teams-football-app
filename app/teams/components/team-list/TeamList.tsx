@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { Teams } from "../../models/team.model";
 import styled from "styled-components";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 
 const CardContainer = styled.div`
   display: flex;
@@ -25,6 +27,9 @@ interface Props {
 }
 
 function TeamList({ teams }: Props) {
+  const handleClick = (website: string) => {
+    window.open(website, "_blank");
+  };
   return (
     <CardContainer>
       {teams.teams.map((t) => (
@@ -59,10 +64,29 @@ function TeamList({ teams }: Props) {
                 aria-controls="panel2a-content"
                 id="panel2a-header"
               >
-                <Typography>WebSite</Typography>
+                
+                <Typography> Email </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>{t.website}</Typography>
+                <Typography sx={{fontsize: 14}} color="text.secondary" gutterBottom>
+                  <a href={`mailto:${t.email}`}>{t.email} </a>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary
+                aria-controls="panel2a-content"
+                id="panel2a-header"
+              >
+                
+                <Typography>Website</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  <Button size="small" onClick={() => handleClick(t.website)}>
+                    {t.website}
+                  </Button>
+                </Typography>
               </AccordionDetails>
             </Accordion>
           </div>
