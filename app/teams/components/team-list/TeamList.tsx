@@ -4,17 +4,16 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Avatar,
   Card,
   CardHeader,
   CardMedia,
-  IconButton,
   Typography,
 } from "@mui/material";
 import { Teams } from "../../models/team.model";
 import styled from "styled-components";
-import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
+import Pagination from "@mui/material/Pagination";
+import { useState } from "react";
 
 const CardContainer = styled.div`
   display: flex;
@@ -30,9 +29,18 @@ function TeamList({ teams }: Props) {
   const handleClick = (website: string) => {
     window.open(website, "_blank");
   };
+  const [onDisplay, setOnDisplay] = useState(teams.teams.slice(0, 5));
+  const itemsPerPage = 5;
+
+  const handlePagination = (e: React.ChangeEvent<unknown>, page:number)=>{
+    const startPage = (page - 1) * itemsPerPage;
+    const endPage = startPage + itemsPerPage;
+    setOnDisplay(teams.teams.slice(startPage, endPage));
+  }
+
   return (
     <CardContainer>
-      {teams.teams.map((t) => (
+      {onDisplay.map((t) => (
         <Card key={t.id}>
           <CardHeader title={t.name} />
           <CardMedia component="img" height="194" image={t.crestUrl} />
@@ -64,11 +72,14 @@ function TeamList({ teams }: Props) {
                 aria-controls="panel2a-content"
                 id="panel2a-header"
               >
-                
                 <Typography> Email </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography sx={{fontsize: 14}} color="text.secondary" gutterBottom>
+                <Typography
+                  sx={{ fontsize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
                   <a href={`mailto:${t.email}`}>{t.email} </a>
                 </Typography>
               </AccordionDetails>
@@ -78,7 +89,6 @@ function TeamList({ teams }: Props) {
                 aria-controls="panel2a-content"
                 id="panel2a-header"
               >
-                
                 <Typography>Website</Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -92,6 +102,7 @@ function TeamList({ teams }: Props) {
           </div>
         </Card>
       ))}
+      <Pagination count={teams.teams.length} variant="outlined" shape="rounded" onChange={handlePagination} />
     </CardContainer>
   );
 }
